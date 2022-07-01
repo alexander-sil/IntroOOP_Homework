@@ -1,45 +1,56 @@
-namespace IntroOOP_1;
+namespace IntroOOP_3;
+
 public class BankAccount
 {
 	// Тип счета: не определен, валютный, брокерский, накопительный, замороженный
-	public enum enum_accountTypes { UDFD, CURR, BROK, SVNG, FRZN };
-	private enum_accountTypes atype;
+	public enum EnumAccountTypes { UDFD, CURR, BROK, SVNG, FRZN };
+	private EnumAccountTypes atype;
+	
 	// Баланс
 	private decimal m_balance;
+	
 	// Номер счета
 	private ulong ul_accountNumber;
+	
 	// Случайный номер счета
 	private static ulong ul_randomAccountNum;
+	
 	// Получение номера счета
 	public ulong GetAccNum()
 	{
 		return ul_accountNumber;
 	}
+	
 	// Установка номера счета
 	public void SetAccNum(ulong accnum)
 	{
 		ul_accountNumber = accnum;
 	}
+	
 	// Получение номера счета
 	public decimal GetBalance()
 	{
 		return m_balance;
 	}
+	
 	// Установка номера счета
 	public void SetBalance(decimal balance)
 	{
 		m_balance = balance;
 	}
+	
     // Получение типа счета
-	public enum_accountTypes GetAccType()
+	public EnumAccountTypes GetAccType()
 	{
 		return atype;
 	}
+	
 	// Установка типа счета
-    public void SetAccType(enum_accountTypes acctype)
+    public void SetAccType(EnumAccountTypes acctype)
 	{
 		atype = acctype;
 	}
+	
 	// Свойства получения и установки значений полей
 	public decimal Balance
 	{
@@ -52,6 +63,7 @@ public class BankAccount
 			m_balance = value;
 		}
 	}
+	
 	public ulong AccountNumber
 	{
 		get
@@ -63,7 +75,8 @@ public class BankAccount
 			ul_accountNumber = value;
 		}
 	}
-	public enum_accountTypes AccountType
+	
+	public EnumAccountTypes AccountType
 	{
 		get
 		{
@@ -74,11 +87,13 @@ public class BankAccount
 			atype = value;
 		}
 	}
+	
 	// Метод пополнения
 	public void TopUp(decimal money)
 	{
 		m_balance += money;
 	}
+	
 	// Метод снятия
     public decimal Cash(decimal funds)
 	{
@@ -90,56 +105,85 @@ public class BankAccount
 			return oldbl - funds;
 		}
 	}
+	
+	// Классы являются ссылочными типами, ref не нужен
+	public bool Transfer(BankAccount source, decimal amount)
+	{
+		try
+		{
+			if (source.Balance > amount)
+			{
+				decimal oldBalance = source.Balance;
+				decimal B = oldBalance - amount;
+				source.Balance -= amount;
+				this.Balance = amount;
+				return true;
+			} else
+			{
+				return false;
+			}
+			
+		}
+		catch
+		{
+			return false;
+		}
+	}
+	
 	// Конструктор по умолчанию
 	public BankAccount()
 	{
-		atype = enum_accountTypes.UDFD;
+		atype = EnumAccountTypes.UDFD;
 		m_balance = 0.00M;
 		ul_randomAccountNum = RandomAccNum();
 		ul_accountNumber = ul_randomAccountNum;
 	}
+	
 	// Конструктор с заполнением поля баланс
     public BankAccount(decimal balance)
 	{
-		atype = enum_accountTypes.UDFD;
+		atype = EnumAccountTypes.UDFD;
 		m_balance = balance;
 		ul_randomAccountNum = RandomAccNum();
 		ul_accountNumber = ul_randomAccountNum;
 	}
+	
 	// Конструктор с заполнением поля тип счета
-	public BankAccount(enum_accountTypes actype)
+	public BankAccount(EnumAccountTypes actype)
 	{
 		atype = actype;
 		m_balance = 0.00M;
 		ul_randomAccountNum = RandomAccNum();
 		ul_accountNumber = ul_randomAccountNum;
 	}
+	
 	// Конструктор с заполнением обоих полей
-    public BankAccount(decimal balance, enum_accountTypes actype)
+    public BankAccount(decimal balance, EnumAccountTypes actype)
 	{
 		atype = actype;
 		m_balance = balance;
 		ul_randomAccountNum = RandomAccNum();
 		ul_accountNumber = ul_randomAccountNum;
 	}
+	
 	// Служебный метод
-	public string ProcessEnumValue(enum_accountTypes enumtype)
+	public string ProcessEnumValue(EnumAccountTypes enumtype)
 	{
 		switch (enumtype)
 		{
-			case enum_accountTypes.UDFD:
+			case EnumAccountTypes.UDFD:
 				return "Не определен";
 				break;
-			case enum_accountTypes.CURR:
+			case EnumAccountTypes.CURR:
 				return "Валютный";
 				break;
-			case enum_accountTypes.BROK:
+			case EnumAccountTypes.BROK:
 				return "Брокерский";
 				break;
-			case enum_accountTypes.SVNG:
+			case EnumAccountTypes.SVNG:
 				return "Накопительный";
 				break;
-			case enum_accountTypes.FRZN:
+			case EnumAccountTypes.FRZN:
 				return "Заморожен";
 				break;
 			default:
@@ -147,6 +191,7 @@ public class BankAccount
 				break;
 		}
 	}
+	
 	// Получение случайного номера счета
 	private ulong RandomAccNum()
 	{
@@ -156,6 +201,7 @@ public class BankAccount
         ulong res = BitConverter.ToUInt64(b, 0);
 		return res;
 	}
+	
 	// Вывод данных счета
 	public void PrintInfo()
 	{
@@ -163,4 +209,5 @@ public class BankAccount
 		Console.WriteLine("Баланс: {0:C2}", m_balance);
 		Console.WriteLine("Тип счета: {0}", ProcessEnumValue(atype));
 	}
+	
 }
