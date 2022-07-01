@@ -39,14 +39,14 @@ public class BankAccount
 		m_balance = balance;
 	}
 	
-    // Получение типа счета
+        // Получение типа счета
 	public EnumAccountTypes GetAccType()
 	{
 		return atype;
 	}
 	
 	// Установка типа счета
-    public void SetAccType(EnumAccountTypes acctype)
+        public void SetAccType(EnumAccountTypes acctype)
 	{
 		atype = acctype;
 	}
@@ -95,7 +95,7 @@ public class BankAccount
 	}
 	
 	// Метод снятия
-    public decimal Cash(decimal funds)
+        public decimal Cash(decimal funds)
 	{
 		if (m_balance < funds) {
 			return 0.00M;
@@ -140,7 +140,7 @@ public class BankAccount
 	}
 	
 	// Конструктор с заполнением поля баланс
-    public BankAccount(decimal balance)
+        public BankAccount(decimal balance)
 	{
 		atype = EnumAccountTypes.UDFD;
 		m_balance = balance;
@@ -158,7 +158,7 @@ public class BankAccount
 	}
 	
 	// Конструктор с заполнением обоих полей
-    public BankAccount(decimal balance, EnumAccountTypes actype)
+        public BankAccount(decimal balance, EnumAccountTypes actype)
 	{
 		atype = actype;
 		m_balance = balance;
