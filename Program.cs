@@ -53,6 +53,8 @@ class Program
 		SearchMail(ref str);
 		
 		Console.WriteLine(str);
+		File.Create("file2.txt").Dispose();
+		File.WriteAllText("file2.txt", str);
 	}
 	
 	static void SearchMail(ref string s)
