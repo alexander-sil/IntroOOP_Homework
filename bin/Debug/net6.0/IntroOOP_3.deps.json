@@ -6,15 +6,15 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "IntroOOP_1/1.0.0": {
+      "IntroOOP_3/1.0.0": {
         "runtime": {
-          "IntroOOP_1.dll": {}
+          "IntroOOP_3.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "IntroOOP_1/1.0.0": {
+    "IntroOOP_3/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
